@@ -40,7 +40,7 @@ return {
     end
 
     return {
-      { '<leader>dd', start_dap_and_close_tree, desc = 'Debug: Start/Continue' },
+      { '<leader>ds', start_dap_and_close_tree, desc = 'Debug: Start/Continue' },
       { '<leader>de', close_dap_and_ui },
       { '<leader>dr', dap.repl.open, desc = 'Open repl' },
       { '<leader>j', dap.step_over, desc = 'Debug: Step Over' },

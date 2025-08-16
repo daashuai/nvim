@@ -159,7 +159,19 @@ vim.opt.scrolloff = 10
 
 -- Allow neovim read .nvim.lua from workspace
 vim.opt.exrc = true
-
+vim.opt.textwidth = 84
+-- 格式化选项，追加 'm' 和 'M'
+vim.opt.formatoptions:append { 'm', 'M' }
+vim.opt.colorcolumn = '85'
+vim.opt.linebreak = true
+-- vim.opt.formatprg = 'fmt -w 84'
+-- 让 gq 对中文有效
+vim.cmd [[
+  augroup ChineseFormat
+    autocmd!
+    autocmd BufRead,BufNewFile * setlocal formatoptions+=mM
+  augroup END
+]]
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -331,7 +343,7 @@ require('lazy').setup({
     },
   },
 
-    -- LSP Plugins
+  -- LSP Plugins
   {
     -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
     -- used for completion, annotations and signatures of Neovim apis
@@ -346,7 +358,7 @@ require('lazy').setup({
   },
 
   { 'Bilal2453/luvit-meta', lazy = true },
-    { -- Autoformat
+  { -- Autoformat
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
@@ -569,10 +581,10 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = {'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'latex', 'markdown_inline', 'query', 'vim', 'vimdoc' },
       -- ensure_installed = 'all',
       -- Autoinstall languages that are not installed
-      ignore_install = { "latex" },
+      ignore_install = {},
       auto_install = false,
       highlight = {
         enable = true,
@@ -604,10 +616,11 @@ require('lazy').setup({
   --   },
 
   {
-        "akinsho/bufferline.nvim",
-        event = "VeryLazy",
-        config = true,
+    'akinsho/bufferline.nvim',
+    event = 'VeryLazy',
+    config = true,
   },
+
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- place them in the correct locations.
@@ -626,7 +639,9 @@ require('lazy').setup({
   require 'kickstart.plugins.nvim-tree',
   require 'kickstart.plugins.telescope',
   require 'kickstart.plugins.latex',
+  require 'kickstart.plugins.markdown',
   require 'kickstart.plugins.aerial',
+  require 'kickstart.plugins.osc52',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
