@@ -1,7 +1,7 @@
 import os
 import socket
 
-def debugger_config(debug=False):
+def debugger(debug=False):
     # 直接获取可用端口（不读取现有环境变量）
     # with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     #     s.bind(("localhost", 0))  # 系统自动分配可用端口

@@ -77,7 +77,7 @@ dap.configurations.python = {
   {
     type = 'python',
     request = 'attach',
-    name = 'Attach to Python via debugpy (port file)',
+    name = 'Attach to Python Process',
     connect = {
       host = '127.0.0.1',
       port = 5678,
